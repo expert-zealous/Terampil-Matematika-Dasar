@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Orbitron", ui-sans-serif, system-ui, sans-serif;
+
+  --color-navy-950: #050a1c;
+  --color-navy-900: #0a1230;
+  --color-navy-800: #101a45;
+  --color-navy-700: #1a2660;
+  --color-navy-600: #27377e;
+
+  --color-maroon-950: #2a0812;
+  --color-maroon-900: #4a0d1e;
+  --color-maroon-800: #6b1228;
+  --color-maroon-700: #8c1a35;
+  --color-maroon-500: #e32646;
+  --color-maroon-400: #ff3b5c;
+  --color-maroon-300: #ff6b85;
+
+  --color-gold-600: #d4a017;
+  --color-gold-500: #f0b429;
+  --color-gold-400: #ffd166;
+  --color-gold-300: #ffe08a;
+  --color-gold-200: #fff0c2;
+
+  --shadow-neon-gold: 0 0 12px rgba(255, 209, 102, 0.55), 0 0 32px rgba(255, 209, 102, 0.22);
+  --shadow-neon-red: 0 0 12px rgba(255, 59, 92, 0.55), 0 0 32px rgba(255, 59, 92, 0.22);
+  --shadow-neon-green: 0 0 12px rgba(52, 211, 153, 0.55), 0 0 28px rgba(52, 211, 153, 0.22);
+  --shadow-neon-blue: 0 0 12px rgba(96, 165, 250, 0.5), 0 0 30px rgba(96, 165, 250, 0.2);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: #e8edff;
+  background-color: #050a1c;
+  background-image:
+    radial-gradient(1100px 520px at 12% -10%, rgba(140, 26, 53, 0.38) 0%, transparent 60%),
+    radial-gradient(900px 480px at 88% -12%, rgba(39, 55, 126, 0.5) 0%, transparent 62%),
+    radial-gradient(700px 500px at 50% 115%, rgba(212, 160, 23, 0.14) 0%, transparent 60%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* ---- neon text helpers ---- */
+.text-glow-gold {
+  text-shadow: 0 0 8px rgba(255, 209, 102, 0.8), 0 0 24px rgba(255, 209, 102, 0.35);
+}
+.text-glow-red {
+  text-shadow: 0 0 8px rgba(255, 59, 92, 0.85), 0 0 24px rgba(255, 59, 92, 0.4);
+}
+.text-glow-blue {
+  text-shadow: 0 0 8px rgba(96, 165, 250, 0.8), 0 0 24px rgba(96, 165, 250, 0.35);
+}
+.text-glow-green {
+  text-shadow: 0 0 8px rgba(52, 211, 153, 0.85), 0 0 24px rgba(52, 211, 153, 0.4);
+}
+
+/* ---- panel ---- */
+.neon-panel {
+  background: linear-gradient(160deg, rgba(16, 26, 69, 0.82), rgba(10, 18, 48, 0.92));
+  border: 1px solid rgba(255, 209, 102, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 0 0 1px rgba(255, 59, 92, 0.08),
+    0 18px 50px -18px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+/* ---- animated top hairline ---- */
+.neon-hairline {
+  background: linear-gradient(90deg, transparent, #ff3b5c 25%, #ffd166 50%, #60a5fa 75%, transparent);
+  background-size: 200% 100%;
+  animation: hairline-slide 6s linear infinite;
+  box-shadow: 0 0 14px rgba(255, 59, 92, 0.6);
+}
+@keyframes hairline-slide {
+  0% { background-position: 0% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ---- shake animation for wrong answers ---- */
+@keyframes shake-x {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(3px); }
+}
+.animate-shake {
+  animation: shake-x 0.4s ease-in-out;
+}
+
+/* ---- soft float for decorative stars ---- */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(8deg); }
+}
+.animate-floaty {
+  animation: floaty 5s ease-in-out infinite;
+}
+
+/* ---- scrollbar ---- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #070d24; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6b1228, #27377e);
+  border-radius: 8px;
+  border: 2px solid #070d24;
+}
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #8c1a35, #3a4da0); }
+
+/* number input arrows off */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
