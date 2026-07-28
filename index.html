@@ -88,34 +88,40 @@ main{max-width:1280px;margin:auto;padding:20px 14px 60px}
     display:inline-flex;
     align-items:center;
     justify-content:center;
+    width:52px;
+    height:52px;
 
-    width:34px;
-    text-align:center;
-
-    font-size:36px;
+    font-size:58px;
     font-weight:900;
     line-height:1;
 
-    margin:0 10px;
+    margin:0 14px;
 
     text-shadow:
-        0 0 8px currentColor,
-        0 0 16px currentColor;
+        0 0 10px currentColor,
+        0 0 20px currentColor,
+        0 0 36px currentColor;
+
+    user-select:none;
 }
 .op.add{
-    color:#FFD54A;      /* + kuning */
+    color:#FFD54A;
 }
 
 .op.sub{
-    color:#FF5252;      /* - merah */
+    color:#FF4D6D;
 }
 
 .op.mul{
-    color:#37A8FF;      /* × biru */
+    color:#3FCBFF;
 }
 
 .op.div{
-    color:#4ADE80;      /* ÷ hijau */
+    color:#4CFF7A;
+}
+.card.act .op{
+    transform:scale(1.15);
+    transition:.18s;
 }
 .ans{width:92px;height:48px;border-radius:12px;border:2px solid #27377e;background:rgba(5,10,28,.6);display:grid;place-items:center;font-family:Orbitron;font-weight:900;font-size:22px;color:#ffe08a;flex-shrink:0}
 @media(min-width:640px){.ans{width:112px}}
