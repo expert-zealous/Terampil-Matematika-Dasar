@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
-import { BadgeCheck, Divide, Lock, Minus, Play, Plus, Shuffle, Trophy, X } from 'lucide-react';
+import { BadgeCheck, Divide, Lock, Minus, Play, Plus, Shuffle, X } from 'lucide-react';
 import { LEVELS, PASS_SCORE } from '../lib/types';
 import Stars from './Stars';
+
 import { cn } from '../utils/cn';
 
 export interface Progress {
@@ -30,9 +31,13 @@ export default function TestLevels({ progress, onStart }: TestLevelsProps) {
         animate={{ opacity: 1, y: 0 }}
         className="mb-7 text-center"
       >
-        <span className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-gold-300 to-gold-600 shadow-neon-gold animate-floaty">
-          <Trophy size={28} className="text-navy-950" strokeWidth={2.2} />
+        <span className="mx-auto mb-3 flex h-[68px] w-[68px] items-center justify-center overflow-hidden rounded-2xl bg-white shadow-neon-gold ring-1 ring-gold-400/50 p-1 animate-floaty">
+          <img src="/logo.png" alt="Expert Zealous" className="block h-full w-full object-contain"
+            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />
         </span>
+        <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.25em] text-maroon-300">
+          Expert Zealous
+        </p>
         <h2 className="font-display text-xl md:text-2xl font-extrabold text-gold-300 text-glow-gold tracking-wide">
           PILIH LEVEL TES
         </h2>

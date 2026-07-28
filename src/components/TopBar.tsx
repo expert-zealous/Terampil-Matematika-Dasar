@@ -5,7 +5,6 @@ import {
   CheckCircle2,
   ChevronDown,
   CircleDashed,
-  Cpu,
   Divide,
   FileDown,
   Hash,
@@ -38,6 +37,7 @@ interface TopBarProps {
   onRangeChange: (min: number, max: number) => void;
   onGenerate: () => void;
   onPrint: () => void;
+  printing: boolean;
   settingsDisabled: boolean;
   stats: Stats;
 }
@@ -121,7 +121,7 @@ function OperationSelect({ value, onChange, disabled }: { value: OpChoice; onCha
 export default function TopBar(props: TopBarProps) {
   const {
     view, onViewChange, opChoice, onOpChange, numberMode, onNumberModeChange,
-    min, max, onRangeChange, onGenerate, onPrint, settingsDisabled, stats,
+    min, max, onRangeChange, onGenerate, onPrint, printing, settingsDisabled, stats,
   } = props;
 
   return (
@@ -130,15 +130,20 @@ export default function TopBar(props: TopBarProps) {
         <div className="flex flex-wrap items-center gap-x-3 gap-y-2 py-2.5">
           {/* Brand */}
           <div className="flex items-center gap-2.5 mr-1">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-maroon-700 via-maroon-500 to-maroon-800 shadow-neon-red ring-1 ring-gold-400/40">
-              <Cpu size={21} className="text-gold-300" strokeWidth={2.2} />
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-white shadow-neon-gold ring-1 ring-gold-400/50 p-0.5">
+              <img
+                src="/logo.png"
+                alt="Expert Zealous"
+                className="block h-full w-full object-contain"
+                onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+              />
             </span>
             <div className="leading-tight">
               <h1 className="font-display text-[13px] md:text-[15px] font-extrabold tracking-wide text-gold-300 text-glow-gold whitespace-nowrap">
                 TERAMPIL MATEMATIKA DASAR
               </h1>
-              <p className="text-[10px] font-semibold tracking-[0.18em] text-blue-300/80 uppercase">
-                Latihan Operasi Hitung • Bilangan Bulat
+              <p className="text-[10px] font-semibold tracking-[0.14em] text-maroon-300 uppercase">
+                Expert Zealous • Jagonya Les Private Matematika
               </p>
             </div>
           </div>
@@ -239,10 +244,14 @@ export default function TopBar(props: TopBarProps) {
             <button
               type="button"
               onClick={onPrint}
-              className="flex items-center gap-1.5 rounded-xl border border-maroon-400/60 bg-gradient-to-b from-maroon-700 to-maroon-900 px-3.5 py-2 text-sm font-extrabold text-gold-200 shadow-neon-red transition-all hover:brightness-125 active:scale-95 cursor-pointer"
+              disabled={printing}
+              className={cn(
+                'flex items-center gap-1.5 rounded-xl border border-maroon-400/60 bg-gradient-to-b from-maroon-700 to-maroon-900 px-3.5 py-2 text-sm font-extrabold text-gold-200 shadow-neon-red transition-all hover:brightness-125 active:scale-95',
+                printing ? 'cursor-wait opacity-70' : 'cursor-pointer',
+              )}
             >
-              <FileDown size={15} strokeWidth={2.4} />
-              <span className="hidden sm:inline">Cetak PDF</span>
+              <FileDown size={15} strokeWidth={2.4} className={printing ? 'animate-bounce' : ''} />
+              <span className="hidden sm:inline">{printing ? 'Menyiapkan…' : 'Cetak PDF'}</span>
               <span className="sm:hidden">PDF</span>
             </button>
           </div>

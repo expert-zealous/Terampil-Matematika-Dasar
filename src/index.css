@@ -121,3 +121,100 @@ input[type="number"]::-webkit-inner-spin-button {
   margin: 0;
 }
 input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+
+/* =========================================================
+   MODE CETAK (Ctrl+P) — hitam putih, ringkas, satu halaman
+   ========================================================= */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm;
+  }
+
+  /* paksa semua jadi hitam-putih & hilangkan efek neon */
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    background-image: none !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+    animation: none !important;
+    transition: none !important;
+    backdrop-filter: none !important;
+  }
+
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+    min-height: auto !important;
+  }
+
+  /* sembunyikan elemen non-soal */
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  /* header lembar cetak (muncul hanya saat print) */
+  .print-only {
+    display: block !important;
+  }
+
+  /* papan soal: 2 kolom rapat agar muat 1 halaman */
+  .print-board {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6mm 8mm !important;
+    page-break-inside: avoid;
+  }
+
+  .print-card {
+    border: 1px solid #000 !important;
+    border-radius: 3mm !important;
+    padding: 3mm 3.5mm !important;
+    transform: none !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .print-card .print-num {
+    border: 1.5px solid #000 !important;
+    background-color: #fff !important;
+    color: #000 !important;
+    border-radius: 1.5mm !important;
+  }
+
+  /* sembunyikan kotak bayangan di belakang saat cetak browser */
+  .print-hide {
+    display: none !important;
+  }
+
+  /* kotak jawaban kosong bergaris tegas */
+  .print-answer-box {
+    border: 1.2px solid #000 !important;
+    border-radius: 2mm !important;
+    min-width: 24mm !important;
+    color: #000 !important;
+  }
+
+  /* jangan cetak ikon status & kursor */
+  .print-hide-status,
+  .print-answer-box .cursor-caret {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+}
+
+/* elemen khusus cetak disembunyikan di layar */
+.print-only {
+  display: none;
+}
+

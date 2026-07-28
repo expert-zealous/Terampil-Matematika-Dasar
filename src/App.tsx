@@ -7,6 +7,7 @@ import VirtualKeyboard from './components/VirtualKeyboard';
 import TestLevels, { type Progress } from './components/TestLevels';
 import ResultModal from './components/ResultModal';
 import Stars from './components/Stars';
+
 import { generateProblems } from './lib/generator';
 import { exportProblemsPdf } from './lib/pdf';
 import type { BoardItem, GenConfig, NumberMode, OpChoice } from './lib/types';
@@ -29,12 +30,17 @@ function loadProgress(): Progress {
 }
 
 const fireConfetti = (big = false) => {
-  confetti({
-    particleCount: big ? 160 : 90,
-    spread: big ? 95 : 70,
-    origin: { y: 0.25 },
-    colors: ['#ffd166', '#ff3b5c', '#60a5fa', '#34d399', '#fff0c2'],
-  });
+  // Defensive: canvas-confetti dapat gagal di lingkungan file:// atau canvas diblokir.
+  try {
+    confetti({
+      particleCount: big ? 160 : 90,
+      spread: big ? 95 : 70,
+      origin: { y: 0.25 },
+      colors: ['#ffd166', '#ff3b5c', '#60a5fa', '#34d399', '#fff0c2'],
+    });
+  } catch {
+    /* abaikan — efek konfeti saja */
+  }
 };
 
 const buildBoard = (cfg: GenConfig): BoardItem[] =>
@@ -196,14 +202,22 @@ export default function App() {
 
   /* ---------------- cetak ---------------- */
   const opText = opChoice === 'random' ? 'Campuran Acak' : OP_LABEL[opChoice];
-  const handlePrint = () => {
-    const inTest = view === 'tes' && level !== null;
-    const lvCfg = inTest ? LEVELS[level - 1] : null;
-    const title = inTest && lvCfg ? `Tes Level ${level} — ${lvCfg.label}` : 'Lembar Latihan Bebas';
-    const subtitle = inTest && lvCfg
-      ? `Operasi: ${lvCfg.config.op === 'random' ? 'Campuran Acak' : OP_LABEL[lvCfg.config.op]}  •  Bilangan: Asli  •  Rentang ${lvCfg.config.min} sampai ${lvCfg.config.max}  •  ${new Date().toLocaleDateString('id-ID')}`
-      : `Operasi: ${opText}  •  Bilangan: ${numberMode === 'asli' ? 'Asli' : 'Bulat'}  •  Rentang ${minVal} sampai ${maxVal}  •  ${new Date().toLocaleDateString('id-ID')}`;
-    exportProblemsPdf(board.map((b) => b.problem), { title, subtitle });
+  const [printing, setPrinting] = useState(false);
+
+  const handlePrint = async () => {
+    if (printing) return;
+    setPrinting(true);
+    try {
+      const inTest = view === 'tes' && level !== null;
+      const lvCfg = inTest ? LEVELS[level - 1] : null;
+      const title = inTest && lvCfg ? `Tes Level ${level} — ${lvCfg.label}` : 'Lembar Latihan Bebas';
+      const subtitle = inTest && lvCfg
+        ? `Operasi: ${lvCfg.config.op === 'random' ? 'Campuran Acak' : OP_LABEL[lvCfg.config.op]}  •  Bilangan: Asli  •  Rentang ${lvCfg.config.min} sampai ${lvCfg.config.max}  •  ${new Date().toLocaleDateString('id-ID')}`
+        : `Operasi: ${opText}  •  Bilangan: ${numberMode === 'asli' ? 'Asli' : 'Bulat'}  •  Rentang ${minVal} sampai ${maxVal}  •  ${new Date().toLocaleDateString('id-ID')}`;
+      await exportProblemsPdf(board.map((b) => b.problem), { title, subtitle });
+    } finally {
+      setPrinting(false);
+    }
   };
 
   const regenerate = () => {
@@ -237,6 +251,7 @@ export default function App() {
         }}
         onGenerate={regenerate}
         onPrint={handlePrint}
+        printing={printing}
         settingsDisabled={view === 'tes'}
         stats={{ correct, wrong, remaining }}
       />
@@ -247,7 +262,7 @@ export default function App() {
         ) : (
           <>
             {/* ---------- kepala bagian ---------- */}
-            <div className="mb-5 flex flex-wrap items-center gap-3">
+            <div className="no-print mb-5 flex flex-wrap items-center gap-3">
               {inTestRun && currentLevel ? (
                 <>
                   <button
@@ -322,8 +337,29 @@ export default function App() {
               )}
             </div>
 
+            {/* ---------- kop khusus saat dicetak lewat browser ---------- */}
+            <div className="print-only mb-4 border-b-2 border-black pb-2">
+              <div className="flex items-center gap-3">
+                <img src="/logo.png" alt="Expert Zealous" className="block h-11 w-11 object-contain"
+                  onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />
+                <div className="leading-tight">
+                  <p className="text-base font-extrabold tracking-wide">EXPERT ZEALOUS</p>
+                  <p className="text-[10px] font-semibold italic">Jagonya Les Private Matematika</p>
+                </div>
+                <div className="ml-auto text-right leading-tight">
+                  <p className="text-sm font-extrabold">TERAMPIL MATEMATIKA DASAR</p>
+                  <p className="text-[10px]">Lembar Latihan Operasi Hitung Bilangan Bulat</p>
+                </div>
+              </div>
+              <div className="mt-2 flex gap-6 text-[11px]">
+                <span>Nama : ______________________</span>
+                <span>Kelas : ____________</span>
+                <span>Nilai : ____________</span>
+              </div>
+            </div>
+
             {/* ---------- papan soal : 2 kolom ---------- */}
-            <section className="grid gap-3 md:gap-4 lg:grid-cols-2">
+            <section className="print-board grid gap-3 md:gap-4 lg:grid-cols-2">
               {board.map((it, i) => (
                 <ProblemCard
                   key={`${genTick}-${i}`}
@@ -336,7 +372,7 @@ export default function App() {
             </section>
 
             {/* ---------- keyboard virtual di bawah soal ---------- */}
-            <section className="neon-panel mx-auto mt-7 w-full max-w-2xl rounded-3xl p-4 md:p-5">
+            <section className="no-print neon-panel mx-auto mt-7 w-full max-w-2xl rounded-3xl p-4 md:p-5">
               <div className="mb-3.5 flex flex-wrap items-center gap-2.5">
                 <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-blue-500/50 bg-navy-800 shadow-neon-blue">
                   <Keyboard size={17} className="text-blue-300" />
