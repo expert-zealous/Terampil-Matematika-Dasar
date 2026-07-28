@@ -183,9 +183,50 @@ main{max-width:1280px;margin:auto;padding:20px 14px 60px}
 .psnum .b1{position:absolute;top:0;right:0;width:6.8mm;height:6.8mm;border:.1px solid #000}
 .psnum .b2{position:absolute;bottom:0;left:0;width:7.5mm;height:7.5mm;border:1.3px solid #000;background:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
 .psexpr{
-    font-size:13px;
+    display:flex;
+    align-items:center;
+    gap:2.5mm;
+    flex:1;
     font-weight:700;
-    letter-spacing:.2px;
+    font-size:15px;
+    letter-spacing:0;
+}
+
+.psn{
+    font-size:15px;
+    font-weight:700;
+}
+
+.psop{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:6mm;
+    font-size:19px;
+    font-weight:900;
+    line-height:1;
+}
+
+.psop.add{
+    font-size:18px;
+}
+
+.psop.sub{
+    font-size:18px;
+}
+
+.psop.mul{
+    font-size:22px;
+}
+
+.psop.div{
+    font-size:22px;
+}
+
+.pseq{
+    margin-left:1.5mm;
+    font-size:16px;
+    font-weight:700;
 }
 .psbox{
     flex-shrink:0;
@@ -410,16 +451,63 @@ function meta(){
   return{t:'Lembar Latihan',s:'Operasi: '+(opC==='random'?'Campuran Acak':LAB[opC])+' • Bilangan '+(mode==='asli'?'Asli':'Bulat')+' • Rentang '+mnV+'-'+mxV};
 }
 function sheetHTML(){
-  var m=meta(),items='';
-  board.forEach(function(it,i){
-    items+='<div class="psitem"><span class="psnum"><span class="b1"></span><span class="b2">'+(i<9?'0':'')+(i+1)+'</span></span>'+
-      '<span class="psexpr">'+fmt(it.p.a)+' '+SYM[it.p.op]+' '+fmt(it.p.b)+' =</span><span class="psbox"></span></div>';
+  var m = meta(), items = '';
+
+  board.forEach(function(it, i){
+
+    items +=
+      '<div class="psitem">' +
+
+        '<span class="psnum">' +
+          '<span class="b1"></span>' +
+          '<span class="b2">' + (i < 9 ? '0' : '') + (i + 1) + '</span>' +
+        '</span>' +
+
+        '<span class="psexpr">' +
+          '<span class="psn">' + fmt(it.p.a) + '</span>' +
+          '<span class="psop ' + it.p.op + '">' + SYM[it.p.op] + '</span>' +
+          '<span class="psn">' + fmt(it.p.b) + '</span>' +
+          '<span class="pseq">=</span>' +
+        '</span>' +
+
+        '<span class="psbox"></span>' +
+
+      '</div>';
+
   });
-  return '<div class="ps"><div class="pskop"><div class="psbrand"><span class="pslogo">'+LOGO+'</span>'+
-    '<div><p class="psname">EXPERT ZEALOUS</p><p class="pstag">Jagonya Les Private Matematika</p></div></div>'+
-    '<div class="pstitle"><p class="pst1">TERAMPIL MATEMATIKA DASAR</p><p class="pst2">'+m.t+'</p><p class="pst2">'+m.s+'</p></div></div>'+
-    '<div class="psid"><span>Nama <i></i></span><span>Kelas <i></i></span><span class="psnil">Nilai <b></b></span></div>'+
-    '<div class="psgrid">'+items+'</div></div>';
+
+  return '' +
+  '<div class="ps">' +
+
+    '<div class="pskop">' +
+
+      '<div class="psbrand">' +
+        '<span class="pslogo">' + LOGO + '</span>' +
+        '<div>' +
+          '<p class="psname">EXPERT ZEALOUS</p>' +
+          '<p class="pstag">Jagonya Les Private Matematika</p>' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="pstitle">' +
+        '<p class="pst1">TERAMPIL MATEMATIKA DASAR</p>' +
+        '<p class="pst2">' + m.t + '</p>' +
+        '<p class="pst2">' + m.s + '</p>' +
+      '</div>' +
+
+    '</div>' +
+
+    '<div class="psid">' +
+      '<span>Nama <i></i></span>' +
+      '<span>Kelas <i></i></span>' +
+      '<span class="psnil">Nilai <b></b></span>' +
+    '</div>' +
+
+    '<div class="psgrid">' +
+      items +
+    '</div>' +
+
+  '</div>';
 }
 function renderPrint(){
   var s=sheetHTML();
