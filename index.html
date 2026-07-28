@@ -84,7 +84,39 @@ main{max-width:1280px;margin:auto;padding:20px 14px 60px}
   align-items:center;
 }
 @media(min-width:640px){.expr{font-size:22px; flex:0 0 180px;}}
-.op{color:#ff3b5c;margin:0 8px}
+.op{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    width:34px;
+    text-align:center;
+
+    font-size:36px;
+    font-weight:900;
+    line-height:1;
+
+    margin:0 10px;
+
+    text-shadow:
+        0 0 8px currentColor,
+        0 0 16px currentColor;
+}
+.op.add{
+    color:#FFD54A;      /* + kuning */
+}
+
+.op.sub{
+    color:#FF5252;      /* - merah */
+}
+
+.op.mul{
+    color:#37A8FF;      /* × biru */
+}
+
+.op.div{
+    color:#4ADE80;      /* ÷ hijau */
+}
 .ans{width:92px;height:48px;border-radius:12px;border:2px solid #27377e;background:rgba(5,10,28,.6);display:grid;place-items:center;font-family:Orbitron;font-weight:900;font-size:22px;color:#ffe08a;flex-shrink:0}
 @media(min-width:640px){.ans{width:112px}}
 .card.act .ans{border-color:#ffd166;box-shadow:0 0 12px rgba(255,209,102,.4)}
@@ -378,7 +410,7 @@ function renderBoard(id){
     var inner=it.in===''?(i===act?'<span style="width:3px;height:24px;background:#ffd166;display:inline-block;animation:bl 1s infinite"></span>':''):it.in;
     d.innerHTML='<div class="ci">'+
       '<div class="numwrap"><div class="nback"></div><div class="nfront">'+(i<9?'0':'')+(i+1)+'</div></div>'+
-      '<div class="expr"><span class="gb">'+fmt(it.p.a)+'</span><span class="op">'+SYM[it.p.op]+'</span><span class="gb">'+fmt(it.p.b)+'</span><span style="margin:0 6px;color:#27377e">=</span></div>'+
+      '<div class="expr"><span class="gb">'+fmt(it.p.a)+'</span><span class="op '+it.p.op+'">'+SYM[it.p.op]+'</span><span class="gb">'+fmt(it.p.b)+'</span><span style="margin:0 6px;color:#27377e">=</span></div>'+
       '<div class="ans '+(it.st==='ok'?'ok':it.st==='no'?'no':'')+(it.shake?' shake':'')+'">'+inner+'</div>'+
       '<div class="st">'+(it.st==='ok'?'✅':it.st==='no'?'❌':'')+'</div></div>';
         d.onclick=function(){act=i;draw();showKbd(i)};
