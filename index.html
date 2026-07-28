@@ -350,11 +350,26 @@ function operands(op,mode,min,max,smart){
   if(lo>hi)hi=lo;
   if((op==='mul'||op==='div')&&(smart||Math.abs(hi)>25)){hi=Math.max(lo,Math.min(hi,12));if(mode!=='asli')lo=Math.max(lo,-12)}
   if(op==='div'){
-    var d,q;
-    if(mode==='asli'){d=rnd(Math.max(1,lo),Math.max(1,hi));q=rnd(Math.max(1,lo),Math.max(1,hi))}
-    else{d=rnd(lo,hi)||1;q=rnd(lo,hi)||1}
-    return{a:d*q,b:d}
-  }
+
+    var list=[];
+
+    for(var a=Math.max(1,lo); a<=hi; a++){
+        for(var b=Math.max(1,lo); b<=hi; b++){
+
+            if(a % b === 0){
+                list.push({a:a,b:b});
+            }
+
+        }
+    }
+
+    // jika tidak ada pasangan, buat soal yang pasti valid
+    if(list.length===0){
+        return {a:lo,b:1};
+    }
+
+    return list[rnd(0,list.length-1)];
+}
   return{a:rnd(lo,hi),b:rnd(lo,hi)}
 }
 function gen(cfg){
