@@ -61,15 +61,15 @@ main{max-width:1280px;margin:auto;padding:20px 14px 60px}
 .head{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:16px}
 .g2{display:grid;gap:12px}
 @media(min-width:900px){.g2{grid-template-columns:1fr 1fr}}
-.card{cursor:pointer;border-radius:16px;border:1px solid rgba(39,55,126,.5);padding:11px 14px;background:linear-gradient(135deg,rgba(16,26,69,.8),rgba(10,18,48,.9));transition:.18s}
+.card{cursor:pointer;border-radius:4px;border:1px solid rgba(39,55,126,.5);padding:11px 14px;background:linear-gradient(135deg,rgba(16,26,69,.8),rgba(10,18,48,.9));transition:.18s}
 .card.act{border-color:rgba(255,209,102,.9);box-shadow:0 0 14px rgba(255,209,102,.5);transform:translateY(-2px)}
 .card.ok{border-color:rgba(52,211,153,.7)}
 .card.no{border-color:rgba(255,59,92,.45)}
 .ci{display:flex;align-items:center;gap:12px}
 /* ---- NOMOR SOAL : KOTAK TUMPUK GANDA ---- */
-.numwrap{position:relative;width:42px;height:40px;flex-shrink:0}
-.nback{position:absolute;top:0;right:0;width:30px;height:30px;border-radius:7px;border:2px solid rgba(39,55,126,.9);background:rgba(5,10,28,.5)}
-.nfront{position:absolute;bottom:0;left:0;width:32px;height:32px;border-radius:7px;border:2px solid #8c1a35;background:#2a0812;display:grid;place-items:center;font-family:Orbitron;font-weight:800;font-size:13px;color:#ff6b85}
+.numwrap{position:relative;width:34px;height:34px;flex-shrink:0}
+.nback{position:absolute;top:1px;right:1px;width:28px;height:28px;border-radius:2px;border:2px solid rgba(39,55,126,.9);background:rgba(5,10,28,.5)}
+.nfront{position:absolute;bottom:0;left:0;width:30px;height:30px;border-radius:2px;border:2px solid #8c1a35;background:#2a0812;display:grid;place-items:center;font-family:Orbitron;font-weight:800;font-size:13px;color:#ff6b85}
 .card.act .nback{border-color:rgba(227,38,70,.75);box-shadow:0 0 10px rgba(255,59,92,.35)}
 .card.act .nfront{border-color:#ffd166;background:#4a0d1e;color:#ffe08a;box-shadow:0 0 12px rgba(255,209,102,.55)}
 .expr{
@@ -124,7 +124,7 @@ main{max-width:1280px;margin:auto;padding:20px 14px 60px}
     transform:scale(1.15);
     transition:.18s;
 }
-.ans{width:92px;height:48px;border-radius:12px;border:2px solid #27377e;background:rgba(5,10,28,.6);display:grid;place-items:center;font-family:Orbitron;font-weight:900;font-size:22px;color:#ffe08a;flex-shrink:0}
+.ans{width:92px;height:48px;border-radius:4px;border:2px solid #27377e;background:rgba(5,10,28,.6);display:grid;place-items:center;font-family:Orbitron;font-weight:900;font-size:22px;color:#ffe08a;flex-shrink:0}
 @media(min-width:640px){.ans{width:112px}}
 .card.act .ans{border-color:#ffd166;box-shadow:0 0 12px rgba(255,209,102,.4)}
 .ans.ok{border-color:#34d399;background:rgba(4,30,20,.6);color:#6ee7b7;box-shadow:0 0 12px rgba(52,211,153,.5)}
