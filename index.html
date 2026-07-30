@@ -440,32 +440,63 @@ function operands(op,mode,min,max,smart){
 
     var list=[];
 
-    for(var a=Math.max(1,lo); a<=hi; a++){
-        for(var b=Math.max(1,lo); b<=hi; b++){
+    for(var a=Math.max(2,lo); a<=hi; a++){
+        for(var b=Math.max(2,lo); b<=hi; b++){
 
-            if(a % b === 0){
-                list.push({a:a,b:b});
-            }
+            if(a % b !== 0) continue;
+
+            // hindari hasil 1
+            if(a === b) continue;
+
+            list.push({
+                a:a,
+                b:b
+            });
 
         }
     }
 
-    // jika tidak ada pasangan, buat soal yang pasti valid
     if(list.length===0){
-        return {a:lo,b:1};
+        return {a:4,b:2};
     }
 
     return list[rnd(0,list.length-1)];
 }
-  return{a:rnd(lo,hi),b:rnd(lo,hi)}
-}
 function gen(cfg){
-  var out=[];
-  for(var i=0;i<10;i++){
-    var op=cfg.op==='random'?pick(['add','sub','mul','div']):cfg.op;
-    var o=operands(op,cfg.mode,cfg.min,cfg.max,cfg.op==='random');
-    out.push({a:o.a,b:o.b,op:op,ans:calc(o.a,o.b,op)});
+  var out = [];
+  var used = new Set();
+
+  while(out.length < 10){
+
+    var op = cfg.op === 'random'
+      ? pick(['add','sub','mul','div'])
+      : cfg.op;
+
+    var o = operands(op,cfg.mode,cfg.min,cfg.max,cfg.op==='random');
+
+    // pembagian tidak boleh a == b
+    if(op === 'div' && o.a === o.b){
+      continue;
+    }
+
+    // kunci unik setiap soal
+    var key = op + "|" + o.a + "|" + o.b;
+
+    // jika sudah pernah muncul, buat lagi
+    if(used.has(key)){
+      continue;
+    }
+
+    used.add(key);
+
+    out.push({
+      a:o.a,
+      b:o.b,
+      op:op,
+      ans:calc(o.a,o.b,op)
+    });
   }
+
   return out;
 }
 
