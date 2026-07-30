@@ -43,7 +43,35 @@ header{position:sticky;top:0;z-index:40;border-bottom:1px solid rgba(26,38,96,.6
 .tabs button.on{background:linear-gradient(90deg,#6b1228,#e32646);color:#ffe08a;box-shadow:0 0 12px rgba(255,59,92,.35)}
 .ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .ctrl.off{pointer-events:none;opacity:.32}
-.sel,.pill{border:1px solid rgba(39,55,126,.7);background:rgba(10,18,48,.8);border-radius:12px;padding:8px 11px;font-size:13px;font-weight:700;color:#dce6ff;display:flex;gap:7px;align-items:center;cursor:pointer;user-select:none}
+.sel,.pill{
+    border:1px solid rgba(39,55,126,.7);
+    background:rgba(10,18,48,.8);
+    border-radius:12px;
+    padding:8px 11px;
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    font-size:13px;
+    font-weight:700;
+    color:#dce6ff;
+
+    cursor:pointer;
+    user-select:none;
+}
+.sel b{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    width:16px;
+    font-size:18px;
+    font-weight:900;
+    line-height:1;
+
+    transform:translateY(-1px);
+}
 .pill input{width:52px;border:1px solid rgba(39,55,126,.7);background:rgba(5,10,28,.8);border-radius:8px;color:#ffe08a;text-align:center;padding:5px;font-family:Orbitron;font-weight:800;font-size:12px}
 .menu{
     position:absolute;
