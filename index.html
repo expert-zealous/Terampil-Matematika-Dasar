@@ -161,40 +161,35 @@ main{max-width:1280px;margin:auto;padding:20px 14px 60px}
 }
 @media(min-width:640px){.expr{font-size:22px; flex:0 0 180px;}}
 .op{
+    margin:0 8px;
+    font-weight:900;
     display:inline-flex;
     align-items:center;
     justify-content:center;
-
-    width:42px;
-    height:42px;
-
-    font-size:46px;
-    font-weight:900;
-    line-height:1;
-
-    margin:0 10px;
-
-    text-shadow:
-        0 0 1px currentColor,
-        0 0 2px currentColor;
-
-    user-select:none;
-    transition:.18s;
 }
+
+/* Penjumlahan */
 .op.add{
-    color:#FFD54A;
+    color:#34d399;
+    font-size:30px;
 }
 
+/* Pengurangan */
 .op.sub{
-    color:#FF4D6D;
+    color:#ff3b5c;
+    font-size:30px;
 }
 
+/* Perkalian (lebih kecil) */
 .op.mul{
-    color:#3FCBFF;
+    color:#ffd166;
+    font-size:26px;
 }
 
+/* Pembagian (lebih kecil) */
 .op.div{
-    color:#4CFF7A;
+    color:#60a5fa;
+    font-size:26px;
 }
 .card.act .op{
     transform:scale(1.15);
@@ -779,7 +774,7 @@ Array.prototype.forEach.call(document.querySelectorAll('#opMenu div'),function(e
     opC=el.getAttribute('data-op');
     Array.prototype.forEach.call(document.querySelectorAll('#opMenu div'),function(x){x.className=''});
     el.className='sel2';
-    document.getElementById('opLbl').textContent=el.textContent;
+    document.getElementById('opLbl').innerHTML = el.innerHTML;
     document.getElementById('opMenu').style.display='none';
     build();draw();
   };
