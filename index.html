@@ -45,9 +45,38 @@ header{position:sticky;top:0;z-index:40;border-bottom:1px solid rgba(26,38,96,.6
 .ctrl.off{pointer-events:none;opacity:.32}
 .sel,.pill{border:1px solid rgba(39,55,126,.7);background:rgba(10,18,48,.8);border-radius:12px;padding:8px 11px;font-size:13px;font-weight:700;color:#dce6ff;display:flex;gap:7px;align-items:center;cursor:pointer;user-select:none}
 .pill input{width:52px;border:1px solid rgba(39,55,126,.7);background:rgba(5,10,28,.8);border-radius:8px;color:#ffe08a;text-align:center;padding:5px;font-family:Orbitron;font-weight:800;font-size:12px}
-.menu{position:absolute;right:0;top:112%;z-index:60;width:205px;border-radius:12px;border:1px solid rgba(255,209,102,.4);background:#0a1230;overflow:hidden;box-shadow:0 0 22px rgba(255,209,102,.28)}
-.menu div{padding:10px 13px;cursor:pointer;font-size:13px;font-weight:700;color:#dbe6ff}
-.menu div:hover,.menu div.sel2{background:rgba(74,13,30,.85);color:#ffe08a}
+.menu{
+    position:absolute;
+    top:112%;
+    left:0;
+    z-index:60;
+
+    width:max-content;
+    min-width:220px;
+    max-width:260px;
+
+    border-radius:12px;
+    border:1px solid rgba(255,209,102,.4);
+    background:#0a1230;
+    overflow:hidden;
+    white-space:nowrap;
+
+    box-shadow:0 0 22px rgba(255,209,102,.28);
+}
+
+.menu div{
+    padding:10px 16px;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:700;
+    color:#dbe6ff;
+}
+
+.menu div:hover,
+.menu div.sel2{
+    background:rgba(74,13,30,.85);
+    color:#ffe08a;
+}
 .seg{display:flex;border:1px solid rgba(39,55,126,.7);background:rgba(10,18,48,.8);border-radius:12px;padding:3px}
 .seg button{border:0;background:transparent;border-radius:8px;padding:6px 11px;font-size:12px;font-weight:800;cursor:pointer;color:rgba(168,184,255,.7);font-family:inherit}
 .seg button.on{background:#1a2660;color:#ffe08a}
