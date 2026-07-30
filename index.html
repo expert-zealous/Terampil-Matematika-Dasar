@@ -433,34 +433,43 @@ function fmt(n){return n<0?'('+n+')':''+n}
 
 function operands(op,mode,min,max,smart){
   var lo=Math.min(min,max),hi=Math.max(min,max);
-  if(mode==='asli')lo=Math.max(1,lo);
-  if(lo>hi)hi=lo;
-  if((op==='mul'||op==='div')&&(smart||Math.abs(hi)>25)){hi=Math.max(lo,Math.min(hi,12));if(mode!=='asli')lo=Math.max(lo,-12)}
+
+  if(mode==='asli') lo=Math.max(1,lo);
+  if(lo>hi) hi=lo;
+
+  if((op==='mul'||op==='div')&&(smart||Math.abs(hi)>25)){
+    hi=Math.max(lo,Math.min(hi,12));
+    if(mode!=='asli') lo=Math.max(lo,-12);
+  }
+
   if(op==='div'){
 
     var list=[];
 
-    for(var a=Math.max(2,lo); a<=hi; a++){
-        for(var b=Math.max(2,lo); b<=hi; b++){
+    for(var a=Math.max(2,lo);a<=hi;a++){
+      for(var b=Math.max(2,lo);b<=hi;b++){
 
-            if(a % b !== 0) continue;
+        if(a%b!==0) continue;
 
-            // hindari hasil 1
-            if(a === b) continue;
+        // hindari soal hasil 1
+        if(a===b) continue;
 
-            list.push({
-                a:a,
-                b:b
-            });
+        list.push({a:a,b:b});
 
-        }
+      }
     }
 
     if(list.length===0){
-        return {a:4,b:2};
+      return {a:4,b:2};
     }
 
     return list[rnd(0,list.length-1)];
+  }
+
+  return{
+    a:rnd(lo,hi),
+    b:rnd(lo,hi)
+  };
 }
 function gen(cfg){
   var out = [];
