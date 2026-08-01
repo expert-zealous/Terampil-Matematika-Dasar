@@ -473,82 +473,128 @@ function pick(a){return a[Math.floor(Math.random()*a.length)]}
 function calc(a,b,op){return op==='add'?a+b:op==='sub'?a-b:op==='mul'?a*b:(b===0?0:a/b)}
 function fmt(n){return n<0?'('+n+')':''+n}
 
-function operands(op,mode,min,max,smart){
-  var lo=Math.min(min,max),hi=Math.max(min,max);
+function operands(op, mode, min, max, smart) {
+  var lo = Math.min(Number(min), Number(max));
+  var hi = Math.max(Number(min), Number(max));
 
-  if(mode==='asli') lo=Math.max(1,lo);
-  if(lo>hi) hi=lo;
+  if (!Number.isFinite(lo)) lo = 1;
+  if (!Number.isFinite(hi)) hi = 20;
 
-  if((op==='mul'||op==='div')&&(smart||Math.abs(hi)>25)){
-    hi=Math.max(lo,Math.min(hi,12));
-    if(mode!=='asli') lo=Math.max(lo,-12);
+  if (mode === 'asli') {
+    lo = Math.max(1, lo);
   }
 
-  if(op==='div'){
+  if (lo > hi) {
+    var temp = lo;
+    lo = hi;
+    hi = temp;
+  }
 
-    var list=[];
+  /*
+   * Operasi pembagian:
+   * - a dan b sama-sama harus berada di interval
+   * - hasil tidak dibatasi interval
+   * - hasil wajib bilangan bulat
+   * - a tidak boleh sama dengan b agar soal tidak selalu menghasilkan 1
+   */
+  if (op === 'div') {
+    var list = [];
 
-    for(var a=Math.max(2,lo);a<=hi;a++){
-      for(var b=Math.max(2,lo);b<=hi;b++){
+    for (var a = lo; a <= hi; a++) {
+      for (var b = lo; b <= hi; b++) {
+        if (b === 0) continue;
+        if (a === b) continue;
+        if (a % b !== 0) continue;
 
-        if(a%b!==0) continue;
-
-        // hindari soal hasil 1
-        if(a===b) continue;
-
-        list.push({a:a,b:b});
-
+        list.push({
+          a: a,
+          b: b
+        });
       }
     }
 
-    if(list.length===0){
-      return {a:4,b:2};
+    /*
+     * Tidak ada pasangan pembagian valid.
+     * Return null agar gen() tidak dipaksa membuat soal.
+     */
+    if (list.length === 0) {
+      return null;
     }
 
-    return list[rnd(0,list.length-1)];
+    return list[rnd(0, list.length - 1)];
   }
 
-  return{
-    a:rnd(lo,hi),
-    b:rnd(lo,hi)
+  /*
+   * Operasi perkalian tetap memakai interval
+   * untuk kedua operand. Hasil boleh di luar interval.
+   */
+  return {
+    a: rnd(lo, hi),
+    b: rnd(lo, hi)
   };
 }
-function gen(cfg){
-  var out = [];
+function gen(cfg) {
+  var all = [];
   var used = new Set();
 
-  while(out.length < 10){
+  var min = Math.min(Number(cfg.min), Number(cfg.max));
+  var max = Math.max(Number(cfg.min), Number(cfg.max));
 
-    var op = cfg.op === 'random'
-      ? pick(['add','sub','mul','div'])
-      : cfg.op;
+  if (!Number.isFinite(min)) min = 1;
+  if (!Number.isFinite(max)) max = 20;
 
-    var o = operands(op,cfg.mode,cfg.min,cfg.max,cfg.op==='random');
-
-    // pembagian tidak boleh a == b
-    if(op === 'div' && o.a === o.b){
-      continue;
-    }
-
-    // kunci unik setiap soal
-    var key = op + "|" + o.a + "|" + o.b;
-
-    // jika sudah pernah muncul, buat lagi
-    if(used.has(key)){
-      continue;
-    }
-
-    used.add(key);
-
-    out.push({
-      a:o.a,
-      b:o.b,
-      op:op,
-      ans:calc(o.a,o.b,op)
-    });
+  if (cfg.mode === 'asli') {
+    min = Math.max(1, min);
   }
 
-  return out;
+  /*
+   * Membuat daftar seluruh kombinasi yang mungkin.
+   * Ini penting agar tidak terjadi infinite loop.
+   */
+  var operations = cfg.op === 'random'
+    ? ['add', 'sub', 'mul', 'div']
+    : [cfg.op];
+
+  operations.forEach(function (op) {
+    for (var a = min; a <= max; a++) {
+      for (var b = min; b <= max; b++) {
+        if (op === 'div') {
+          if (b === 0) continue;
+          if (a === b) continue;
+          if (a % b !== 0) continue;
+        }
+
+        var key = op + '|' + a + '|' + b;
+
+        if (used.has(key)) continue;
+
+        used.add(key);
+
+        all.push({
+          a: a,
+          b: b,
+          op: op,
+          ans: calc(a, b, op)
+        });
+      }
+    }
+  });
+
+  /*
+   * Acak seluruh kombinasi.
+   */
+  for (var i = all.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = all[i];
+    all[i] = all[j];
+    all[j] = temp;
+  }
+
+  /*
+   * Ambil maksimal 10 soal.
+   * Jika kombinasi hanya tersedia 4, maka hanya dibuat 4.
+   */
+  return all.slice(0, 10);
 }
 
 /* ============ STATE ============ */
@@ -687,7 +733,13 @@ function draw(){
   var c=$('ctrl');if(c)c.className='ctrl'+(view!=='latihan'?' off':'');
   var opName=opC==='random'?'Campuran Acak':LAB[opC];
   setTxt('opChip',opName);
-  setTxt('subL','10 soal acak • bilangan '+(mode==='asli'?'asli':'bulat')+' '+Math.min(mnV,mxV)+' – '+Math.max(mnV,mxV));
+  setTxt(
+  'subL',
+  board.length + ' soal • bilangan ' +
+  (mode === 'asli' ? 'asli' : 'bulat') +
+  ' ' + Math.min(mnV, mxV) +
+  ' – ' + Math.max(mnV, mxV)
+);
   if(view==='latihan'){renderBoard('board');renderKbd('kbd')}
   if(view==='test'){
     renderBoard('boardT');renderKbd('kbdT');
@@ -696,11 +748,23 @@ function draw(){
     setHtm('tStars',stars(lvNow,(prog.best[lvNow]||0)>=PASS));
     setTxt('tDesc',L.label+' • '+L.desc+' • Lulus minimal '+PASS+'/10');
     var done=board.filter(function(x){return x.st}).length;
-    var bar=$('bar');if(bar)bar.style.width=(done/10*100)+'%';
+    var bar = $('bar');
+
+if (bar) {
+  bar.style.width = (done / Math.max(1, board.length) * 100) + '%';
+}
   }
-  var ok=board.filter(function(x){return x.st==='ok'}).length;
-  var no=board.filter(function(x){return x.st==='no'}).length;
-  setTxt('sT',ok);setTxt('sF',no);setTxt('sR',10-ok-no);
+  var ok = board.filter(function (x) {
+  return x.st === 'ok';
+}).length;
+
+var no = board.filter(function (x) {
+  return x.st === 'no';
+}).length;
+
+setTxt('sT', ok);
+setTxt('sF', no);
+setTxt('sR', board.length - ok - no);
   renderPrint();
 }
 
@@ -709,7 +773,20 @@ function mut(f){board=board.map(function(it,i){return i===act?f(it):it})}
 function dig(d){mut(function(it){if(it.st==='ok')return it;if(it.in.replace('-','').length>=6)return it;return{p:it.p,in:it.in+d,st:it.st==='no'?'':it.st,shake:0}});draw();showKbd(act);}
 function neg(){mut(function(it){if(it.st==='ok')return it;return{p:it.p,in:it.in.charAt(0)==='-'?it.in.slice(1):'-'+it.in,st:it.st==='no'?'':it.st,shake:0}});draw();showKbd(act);}
 function del(){mut(function(it){if(it.st==='ok')return it;return{p:it.p,in:it.in.slice(0,-1),st:it.st==='no'?'':it.st,shake:0}});draw();showKbd(act);}
-function next(){for(var k=1;k<=10;k++){var i=(act+k)%10;if(board[i].st!=='ok'&&i!==act){act=i;return}}}
+function next() {
+  var total = board.length;
+
+  if (total === 0) return;
+
+  for (var k = 1; k <= total; k++) {
+    var i = (act + k) % total;
+
+    if (board[i].st !== 'ok' && i !== act) {
+      act = i;
+      return;
+    }
+  }
+}
 function check(){
   var it=board[act];if(!it)return;
   if(it.st==='ok'){next();draw();hideKbd();return}
