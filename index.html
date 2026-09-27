@@ -43,87 +43,11 @@ header{position:sticky;top:0;z-index:40;border-bottom:1px solid rgba(26,38,96,.6
 .tabs button.on{background:linear-gradient(90deg,#6b1228,#e32646);color:#ffe08a;box-shadow:0 0 12px rgba(255,59,92,.35)}
 .ctrl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .ctrl.off{pointer-events:none;opacity:.32}
-.sel,.pill{
-    border:1px solid rgba(39,55,126,.7);
-    background:rgba(10,18,48,.8);
-    border-radius:12px;
-    padding:8px 11px;
-
-    display:flex;
-    align-items:center;
-    gap:8px;
-
-    font-size:13px;
-    font-weight:700;
-    color:#dce6ff;
-
-    cursor:pointer;
-    user-select:none;
-}
-.sel b{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-
-    width:16px;
-    font-size:18px;
-    font-weight:900;
-    line-height:1;
-
-    transform:translateY(-1px);
-}
+.sel,.pill{border:1px solid rgba(39,55,126,.7);background:rgba(10,18,48,.8);border-radius:12px;padding:8px 11px;font-size:13px;font-weight:700;color:#dce6ff;display:flex;gap:7px;align-items:center;cursor:pointer;user-select:none}
 .pill input{width:52px;border:1px solid rgba(39,55,126,.7);background:rgba(5,10,28,.8);border-radius:8px;color:#ffe08a;text-align:center;padding:5px;font-family:Orbitron;font-weight:800;font-size:12px}
-.menu{
-    position:absolute;
-    top:112%;
-    left:0;
-    z-index:60;
-
-    width:max-content;
-    min-width:220px;
-    max-width:260px;
-
-    border-radius:12px;
-    border:1px solid rgba(255,209,102,.4);
-    background:#0a1230;
-    overflow:hidden;
-    white-space:nowrap;
-
-    box-shadow:0 0 22px rgba(255,209,102,.28);
-}
-
-.menu div{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 13px;
-    font-size:16px;
-    font-weight:700;
-    color:#dbe6ff;
-}
-
-.menu div b{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    width:22px;
-    height:22px;
-
-    font-size:22px;
-    font-weight:900;
-    line-height:1;
-
-    flex-shrink:0;
-
-    transform:translateY(-2px);
-}
-
-.menu div:hover,
-.menu div.sel2{
-    background:rgba(74,13,30,.85);
-    color:#ffe08a;
-}
+.menu{position:absolute;right:0;top:112%;z-index:60;width:205px;border-radius:12px;border:1px solid rgba(255,209,102,.4);background:#0a1230;overflow:hidden;box-shadow:0 0 22px rgba(255,209,102,.28)}
+.menu div{padding:10px 13px;cursor:pointer;font-size:13px;font-weight:700;color:#dbe6ff}
+.menu div:hover,.menu div.sel2{background:rgba(74,13,30,.85);color:#ffe08a}
 .seg{display:flex;border:1px solid rgba(39,55,126,.7);background:rgba(10,18,48,.8);border-radius:12px;padding:3px}
 .seg button{border:0;background:transparent;border-radius:8px;padding:6px 11px;font-size:12px;font-weight:800;cursor:pointer;color:rgba(168,184,255,.7);font-family:inherit}
 .seg button.on{background:#1a2660;color:#ffe08a}
@@ -137,15 +61,15 @@ main{max-width:1280px;margin:auto;padding:20px 14px 60px}
 .head{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:16px}
 .g2{display:grid;gap:12px}
 @media(min-width:900px){.g2{grid-template-columns:1fr 1fr}}
-.card{cursor:pointer;border-radius:4px;border:1px solid rgba(39,55,126,.5);padding:11px 14px;background:linear-gradient(135deg,rgba(16,26,69,.8),rgba(10,18,48,.9));transition:.18s}
+.card{cursor:pointer;border-radius:16px;border:1px solid rgba(39,55,126,.5);padding:11px 14px;background:linear-gradient(135deg,rgba(16,26,69,.8),rgba(10,18,48,.9));transition:.18s}
 .card.act{border-color:rgba(255,209,102,.9);box-shadow:0 0 14px rgba(255,209,102,.5);transform:translateY(-2px)}
 .card.ok{border-color:rgba(52,211,153,.7)}
 .card.no{border-color:rgba(255,59,92,.45)}
 .ci{display:flex;align-items:center;gap:12px}
 /* ---- NOMOR SOAL : KOTAK TUMPUK GANDA ---- */
-.numwrap{position:relative;width:34px;height:34px;flex-shrink:0}
-.nback{position:absolute;top:-2px;right:-2px;width:28px;height:28px;border-radius:2px;border:2px solid rgba(39,55,126,.9);background:rgba(5,10,28,.5)}
-.nfront{position:absolute;bottom:0;left:0;width:30px;height:30px;border-radius:2px;border:2px solid #8c1a35;background:#2a0812;display:grid;place-items:center;font-family:Orbitron;font-weight:800;font-size:13px;color:#ff6b85}
+.numwrap{position:relative;width:42px;height:40px;flex-shrink:0}
+.nback{position:absolute;top:0;right:0;width:30px;height:30px;border-radius:7px;border:2px solid rgba(39,55,126,.9);background:rgba(5,10,28,.5)}
+.nfront{position:absolute;bottom:0;left:0;width:32px;height:32px;border-radius:7px;border:2px solid #8c1a35;background:#2a0812;display:grid;place-items:center;font-family:Orbitron;font-weight:800;font-size:13px;color:#ff6b85}
 .card.act .nback{border-color:rgba(227,38,70,.75);box-shadow:0 0 10px rgba(255,59,92,.35)}
 .card.act .nfront{border-color:#ffd166;background:#4a0d1e;color:#ffe08a;box-shadow:0 0 12px rgba(255,209,102,.55)}
 .expr{
@@ -160,42 +84,8 @@ main{max-width:1280px;margin:auto;padding:20px 14px 60px}
   align-items:center;
 }
 @media(min-width:640px){.expr{font-size:22px; flex:0 0 180px;}}
-.op{
-    margin:0 8px;
-    font-weight:900;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-}
-
-/* Penjumlahan */
-.op.add{
-    color:#34d399;
-    font-size:30px;
-}
-
-/* Pengurangan */
-.op.sub{
-    color:#ff3b5c;
-    font-size:30px;
-}
-
-/* Perkalian (lebih kecil) */
-.op.mul{
-    color:#ffd166;
-    font-size:26px;
-}
-
-/* Pembagian (lebih kecil) */
-.op.div{
-    color:#60a5fa;
-    font-size:26px;
-}
-.card.act .op{
-    transform:scale(1.15);
-    transition:.18s;
-}
-.ans{width:92px;height:48px;border-radius:4px;border:2px solid #27377e;background:rgba(5,10,28,.6);display:grid;place-items:center;font-family:Orbitron;font-weight:900;font-size:22px;color:#ffe08a;flex-shrink:0}
+.op{color:#ff3b5c;margin:0 8px}
+.ans{width:92px;height:48px;border-radius:12px;border:2px solid #27377e;background:rgba(5,10,28,.6);display:grid;place-items:center;font-family:Orbitron;font-weight:900;font-size:22px;color:#ffe08a;flex-shrink:0}
 @media(min-width:640px){.ans{width:112px}}
 .card.act .ans{border-color:#ffd166;box-shadow:0 0 12px rgba(255,209,102,.4)}
 .ans.ok{border-color:#34d399;background:rgba(4,30,20,.6);color:#6ee7b7;box-shadow:0 0 12px rgba(52,211,153,.5)}
@@ -208,6 +98,27 @@ main{max-width:1280px;margin:auto;padding:20px 14px 60px}
 .kbd button.dg:hover{border-color:rgba(255,209,102,.8);box-shadow:0 0 12px rgba(255,209,102,.35)}
 .kbd button.del{background:rgba(74,13,30,.7);border-color:rgba(140,26,53,.8);color:#ff6b85}
 .kbd button.mn{color:#93c5fd;border-color:rgba(59,130,246,.45)}
+.kbdClose{
+  margin-left:4px;
+  width:30px;height:30px;
+  border-radius:9px;
+  border:1px solid rgba(255,59,92,.6);
+  background:rgba(74,13,30,.75);
+  color:#ff6b85;
+  font-family:inherit;
+  font-weight:900;
+  font-size:18px;
+  line-height:1;
+  cursor:pointer;
+  display:grid;
+  place-items:center;
+  padding:0;
+}
+.kbdClose:hover{
+  border-color:#ff6b85;
+  box-shadow:0 0 10px rgba(255,59,92,.35);
+}
+.kbdClose:active{transform:scale(.92)}
 .kbd button.ok2{grid-row:span 2;height:100%;background:linear-gradient(180deg,#ffe08a,#ffd166 45%,#d4a017);color:#050a1c;border-color:#ffe08a;box-shadow:0 0 16px rgba(255,209,102,.6);font-size:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
 @media(min-width:640px){.lvs{grid-template-columns:1fr 1fr}}
 @media(min-width:1024px){.lvs{grid-template-columns:1fr 1fr 1fr}}
@@ -257,62 +168,11 @@ main{max-width:1280px;margin:auto;padding:20px 14px 60px}
 .psgrid{display:grid;grid-template-columns:1fr 1fr;gap:2.2mm 4mm}
 .psitem{display:flex;align-items:center;gap:6px;border:1px solid #000;border-radius:2mm;padding:1.8mm 2.5mm}
 /* nomor kotak tumpuk ganda versi cetak */
-.psnum{position:relative;width:10mm;height:9mm;flex-shrink:0}
-.psnum .b1{position:absolute;top:-0.2mm;right:0.7mm;width:7.5mm;height:7.5mm;border:.1px solid #000}
-.psnum .b2{position:absolute;bottom:0;left:0;width:7.5mm;height:7.5mm;border:1px solid #000;background:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
-.psexpr{
-    display:flex;
-    align-items:center;
-    gap:2.5mm;
-    flex:1;
-    font-weight:700;
-    font-size:15px;
-    letter-spacing:0;
-}
-
-.psn{
-    font-size:15px;
-    font-weight:700;
-}
-
-.psop{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    width:6mm;
-    font-size:19px;
-    font-weight:900;
-    line-height:1;
-}
-
-.psop.add{
-    font-size:18px;
-}
-
-.psop.sub{
-    font-size:18px;
-}
-
-.psop.mul{
-    font-size:22px;
-}
-
-.psop.div{
-    font-size:22px;
-}
-
-.pseq{
-    margin-left:1.5mm;
-    font-size:16px;
-    font-weight:700;
-}
-.psbox{
-    flex-shrink:0;
-    width:25mm;
-    height:8.5mm;
-    border:1.4px solid #000;
-    border-radius:1.5mm;
-}
+.psnum{position:relative;width:8mm;height:7.5mm;flex-shrink:0}
+.psnum .b1{position:absolute;top:0;right:0;width:5.6mm;height:5.6mm;border:.8px solid #000}
+.psnum .b2{position:absolute;bottom:0;left:0;width:6mm;height:6mm;border:1.1px solid #000;background:#fff;display:flex;align-items:center;justify-content:center;font-size:7.5px;font-weight:800}
+.psexpr{flex:1;font-weight:800;font-size:12px;white-space:nowrap}
+.psbox{flex-shrink:0;width:20mm;height:8mm;border:1.3px solid #000;border-radius:1.4mm}
 .pcut{display:none}
 
 @media print{
@@ -346,10 +206,10 @@ main{max-width:1280px;margin:auto;padding:20px 14px 60px}
         <div style="position:relative">
           <div id="opBtn" class="sel"><span id="opLbl">🔀 Acak (Semua)</span> ▾</div>
           <div id="opMenu" class="menu" style="display:none">
-            <div data-op="add"><b>+</b> Penjumlahan</div>
-            <div data-op="sub"><b>−</b> Pengurangan</div>
-            <div data-op="mul"><b>×</b> Perkalian</div>
-            <div data-op="div"><b>÷</b> Pembagian</div>
+            <div data-op="add">➕ Penjumlahan</div>
+            <div data-op="sub">➖ Pengurangan</div>
+            <div data-op="mul">✕ Perkalian</div>
+            <div data-op="div">➗ Pembagian</div>
             <div data-op="random" class="sel2">🔀 Acak (Semua)</div>
           </div>
         </div>
@@ -392,6 +252,7 @@ main{max-width:1280px;margin:auto;padding:20px 14px 60px}
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px">
         <div style="font-family:Orbitron;font-weight:800;letter-spacing:.12em;font-size:11px;color:#dbe6ff" class="gb">⌨ KEYBOARD JAWABAN</div>
         <div style="margin-left:auto;font-size:9px;color:rgba(147,168,255,.6)">⌫ hapus • OK periksa</div>
+        <button type="button" class="kbdClose" title="Tutup keyboard" aria-label="Tutup keyboard" onclick="hideKbd()">✕</button>
       </div>
       <div class="kbd" id="kbd"></div>
     </div>
@@ -423,6 +284,7 @@ main{max-width:1280px;margin:auto;padding:20px 14px 60px}
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px">
         <div style="font-family:Orbitron;font-weight:800;letter-spacing:.12em;font-size:11px;color:#dbe6ff" class="gb">⌨ KEYBOARD JAWABAN</div>
         <div style="margin-left:auto;font-size:9px;color:rgba(147,168,255,.6)">⌫ hapus • OK periksa</div>
+        <button type="button" class="kbdClose" title="Tutup keyboard" aria-label="Tutup keyboard" onclick="hideKbd()">✕</button>
       </div>
       <div class="kbd" id="kbdT"></div>
     </div>
@@ -473,128 +335,27 @@ function pick(a){return a[Math.floor(Math.random()*a.length)]}
 function calc(a,b,op){return op==='add'?a+b:op==='sub'?a-b:op==='mul'?a*b:(b===0?0:a/b)}
 function fmt(n){return n<0?'('+n+')':''+n}
 
-function operands(op, mode, min, max, smart) {
-  var lo = Math.min(Number(min), Number(max));
-  var hi = Math.max(Number(min), Number(max));
-
-  if (!Number.isFinite(lo)) lo = 1;
-  if (!Number.isFinite(hi)) hi = 20;
-
-  if (mode === 'asli') {
-    lo = Math.max(1, lo);
+function operands(op,mode,min,max,smart){
+  var lo=Math.min(min,max),hi=Math.max(min,max);
+  if(mode==='asli')lo=Math.max(1,lo);
+  if(lo>hi)hi=lo;
+  if((op==='mul'||op==='div')&&(smart||Math.abs(hi)>25)){hi=Math.max(lo,Math.min(hi,12));if(mode!=='asli')lo=Math.max(lo,-12)}
+  if(op==='div'){
+    var d,q;
+    if(mode==='asli'){d=rnd(Math.max(1,lo),Math.max(1,hi));q=rnd(Math.max(1,lo),Math.max(1,hi))}
+    else{d=rnd(lo,hi)||1;q=rnd(lo,hi)||1}
+    return{a:d*q,b:d}
   }
-
-  if (lo > hi) {
-    var temp = lo;
-    lo = hi;
-    hi = temp;
-  }
-
-  /*
-   * Operasi pembagian:
-   * - a dan b sama-sama harus berada di interval
-   * - hasil tidak dibatasi interval
-   * - hasil wajib bilangan bulat
-   * - a tidak boleh sama dengan b agar soal tidak selalu menghasilkan 1
-   */
-  if (op === 'div') {
-    var list = [];
-
-    for (var a = lo; a <= hi; a++) {
-      for (var b = lo; b <= hi; b++) {
-        if (b === 0) continue;
-        if (a === b) continue;
-        if (a % b !== 0) continue;
-
-        list.push({
-          a: a,
-          b: b
-        });
-      }
-    }
-
-    /*
-     * Tidak ada pasangan pembagian valid.
-     * Return null agar gen() tidak dipaksa membuat soal.
-     */
-    if (list.length === 0) {
-      return null;
-    }
-
-    return list[rnd(0, list.length - 1)];
-  }
-
-  /*
-   * Operasi perkalian tetap memakai interval
-   * untuk kedua operand. Hasil boleh di luar interval.
-   */
-  return {
-    a: rnd(lo, hi),
-    b: rnd(lo, hi)
-  };
+  return{a:rnd(lo,hi),b:rnd(lo,hi)}
 }
-function gen(cfg) {
-  var all = [];
-  var used = new Set();
-
-  var min = Math.min(Number(cfg.min), Number(cfg.max));
-  var max = Math.max(Number(cfg.min), Number(cfg.max));
-
-  if (!Number.isFinite(min)) min = 1;
-  if (!Number.isFinite(max)) max = 20;
-
-  if (cfg.mode === 'asli') {
-    min = Math.max(1, min);
+function gen(cfg){
+  var out=[];
+  for(var i=0;i<10;i++){
+    var op=cfg.op==='random'?pick(['add','sub','mul','div']):cfg.op;
+    var o=operands(op,cfg.mode,cfg.min,cfg.max,cfg.op==='random');
+    out.push({a:o.a,b:o.b,op:op,ans:calc(o.a,o.b,op)});
   }
-
-  /*
-   * Membuat daftar seluruh kombinasi yang mungkin.
-   * Ini penting agar tidak terjadi infinite loop.
-   */
-  var operations = cfg.op === 'random'
-    ? ['add', 'sub', 'mul', 'div']
-    : [cfg.op];
-
-  operations.forEach(function (op) {
-    for (var a = min; a <= max; a++) {
-      for (var b = min; b <= max; b++) {
-        if (op === 'div') {
-          if (b === 0) continue;
-          if (a === b) continue;
-          if (a % b !== 0) continue;
-        }
-
-        var key = op + '|' + a + '|' + b;
-
-        if (used.has(key)) continue;
-
-        used.add(key);
-
-        all.push({
-          a: a,
-          b: b,
-          op: op,
-          ans: calc(a, b, op)
-        });
-      }
-    }
-  });
-
-  /*
-   * Acak seluruh kombinasi.
-   */
-  for (var i = all.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var temp = all[i];
-    all[i] = all[j];
-    all[j] = temp;
-  }
-
-  /*
-   * Ambil maksimal 10 soal.
-   * Jika kombinasi hanya tersedia 4, maka hanya dibuat 4.
-   */
-  return all.slice(0, 10);
+  return out;
 }
 
 /* ============ STATE ============ */
@@ -615,63 +376,16 @@ function meta(){
   return{t:'Lembar Latihan',s:'Operasi: '+(opC==='random'?'Campuran Acak':LAB[opC])+' • Bilangan '+(mode==='asli'?'Asli':'Bulat')+' • Rentang '+mnV+'-'+mxV};
 }
 function sheetHTML(){
-  var m = meta(), items = '';
-
-  board.forEach(function(it, i){
-
-    items +=
-      '<div class="psitem">' +
-
-        '<span class="psnum">' +
-          '<span class="b1"></span>' +
-          '<span class="b2">' + (i < 9 ? '0' : '') + (i + 1) + '</span>' +
-        '</span>' +
-
-        '<span class="psexpr">' +
-          '<span class="psn">' + fmt(it.p.a) + '</span>' +
-          '<span class="psop ' + it.p.op + '">' + SYM[it.p.op] + '</span>' +
-          '<span class="psn">' + fmt(it.p.b) + '</span>' +
-          '<span class="pseq">=</span>' +
-        '</span>' +
-
-        '<span class="psbox"></span>' +
-
-      '</div>';
-
+  var m=meta(),items='';
+  board.forEach(function(it,i){
+    items+='<div class="psitem"><span class="psnum"><span class="b1"></span><span class="b2">'+(i<9?'0':'')+(i+1)+'</span></span>'+
+      '<span class="psexpr">'+fmt(it.p.a)+' '+SYM[it.p.op]+' '+fmt(it.p.b)+' =</span><span class="psbox"></span></div>';
   });
-
-  return '' +
-  '<div class="ps">' +
-
-    '<div class="pskop">' +
-
-      '<div class="psbrand">' +
-        '<span class="pslogo">' + LOGO + '</span>' +
-        '<div>' +
-          '<p class="psname">EXPERT ZEALOUS</p>' +
-          '<p class="pstag">Jagonya Les Private Matematika</p>' +
-        '</div>' +
-      '</div>' +
-
-      '<div class="pstitle">' +
-        '<p class="pst1">TERAMPIL MATEMATIKA DASAR</p>' +
-        '<p class="pst2">' + m.t + '</p>' +
-        '<p class="pst2">' + m.s + '</p>' +
-      '</div>' +
-
-    '</div>' +
-
-    '<div class="psid">' +
-      '<span>Nama <i></i></span>' +
-      '<span>Kelas <i></i></span>' +
-      '<span class="psnil">Nilai <b></b></span>' +
-    '</div>' +
-
-    '<div class="psgrid">' +
-      items +
-    '</div>' +
-
-  '</div>';
+  return '<div class="ps"><div class="pskop"><div class="psbrand"><span class="pslogo">'+LOGO+'</span>'+
+    '<div><p class="psname">EXPERT ZEALOUS</p><p class="pstag">Jagonya Les Private Matematika</p></div></div>'+
+    '<div class="pstitle"><p class="pst1">TERAMPIL MATEMATIKA DASAR</p><p class="pst2">'+m.t+'</p><p class="pst2">'+m.s+'</p></div></div>'+
+    '<div class="psid"><span>Nama <i></i></span><span>Kelas <i></i></span><span class="psnil">Nilai <b></b></span></div>'+
+    '<div class="psgrid">'+items+'</div></div>';
 }
 function renderPrint(){
   var s=sheetHTML();
@@ -687,7 +401,7 @@ function renderBoard(id){
     var inner=it.in===''?(i===act?'<span style="width:3px;height:24px;background:#ffd166;display:inline-block;animation:bl 1s infinite"></span>':''):it.in;
     d.innerHTML='<div class="ci">'+
       '<div class="numwrap"><div class="nback"></div><div class="nfront">'+(i<9?'0':'')+(i+1)+'</div></div>'+
-      '<div class="expr"><span class="gb">'+fmt(it.p.a)+'</span><span class="op '+it.p.op+'">'+SYM[it.p.op]+'</span><span class="gb">'+fmt(it.p.b)+'</span><span style="margin:0 6px;color:#27377e">=</span></div>'+
+      '<div class="expr"><span class="gb">'+fmt(it.p.a)+'</span><span class="op">'+SYM[it.p.op]+'</span><span class="gb">'+fmt(it.p.b)+'</span><span style="margin:0 6px;color:#27377e">=</span></div>'+
       '<div class="ans '+(it.st==='ok'?'ok':it.st==='no'?'no':'')+(it.shake?' shake':'')+'">'+inner+'</div>'+
       '<div class="st">'+(it.st==='ok'?'✅':it.st==='no'?'❌':'')+'</div></div>';
         d.onclick=function(){act=i;draw();showKbd(i)};
@@ -733,13 +447,7 @@ function draw(){
   var c=$('ctrl');if(c)c.className='ctrl'+(view!=='latihan'?' off':'');
   var opName=opC==='random'?'Campuran Acak':LAB[opC];
   setTxt('opChip',opName);
-  setTxt(
-  'subL',
-  board.length + ' soal • bilangan ' +
-  (mode === 'asli' ? 'asli' : 'bulat') +
-  ' ' + Math.min(mnV, mxV) +
-  ' – ' + Math.max(mnV, mxV)
-);
+  setTxt('subL','10 soal acak • bilangan '+(mode==='asli'?'asli':'bulat')+' '+Math.min(mnV,mxV)+' – '+Math.max(mnV,mxV));
   if(view==='latihan'){renderBoard('board');renderKbd('kbd')}
   if(view==='test'){
     renderBoard('boardT');renderKbd('kbdT');
@@ -748,23 +456,11 @@ function draw(){
     setHtm('tStars',stars(lvNow,(prog.best[lvNow]||0)>=PASS));
     setTxt('tDesc',L.label+' • '+L.desc+' • Lulus minimal '+PASS+'/10');
     var done=board.filter(function(x){return x.st}).length;
-    var bar = $('bar');
-
-if (bar) {
-  bar.style.width = (done / Math.max(1, board.length) * 100) + '%';
-}
+    var bar=$('bar');if(bar)bar.style.width=(done/10*100)+'%';
   }
-  var ok = board.filter(function (x) {
-  return x.st === 'ok';
-}).length;
-
-var no = board.filter(function (x) {
-  return x.st === 'no';
-}).length;
-
-setTxt('sT', ok);
-setTxt('sF', no);
-setTxt('sR', board.length - ok - no);
+  var ok=board.filter(function(x){return x.st==='ok'}).length;
+  var no=board.filter(function(x){return x.st==='no'}).length;
+  setTxt('sT',ok);setTxt('sF',no);setTxt('sR',10-ok-no);
   renderPrint();
 }
 
@@ -773,20 +469,7 @@ function mut(f){board=board.map(function(it,i){return i===act?f(it):it})}
 function dig(d){mut(function(it){if(it.st==='ok')return it;if(it.in.replace('-','').length>=6)return it;return{p:it.p,in:it.in+d,st:it.st==='no'?'':it.st,shake:0}});draw();showKbd(act);}
 function neg(){mut(function(it){if(it.st==='ok')return it;return{p:it.p,in:it.in.charAt(0)==='-'?it.in.slice(1):'-'+it.in,st:it.st==='no'?'':it.st,shake:0}});draw();showKbd(act);}
 function del(){mut(function(it){if(it.st==='ok')return it;return{p:it.p,in:it.in.slice(0,-1),st:it.st==='no'?'':it.st,shake:0}});draw();showKbd(act);}
-function next() {
-  var total = board.length;
-
-  if (total === 0) return;
-
-  for (var k = 1; k <= total; k++) {
-    var i = (act + k) % total;
-
-    if (board[i].st !== 'ok' && i !== act) {
-      act = i;
-      return;
-    }
-  }
-}
+function next(){for(var k=1;k<=10;k++){var i=(act+k)%10;if(board[i].st!=='ok'&&i!==act){act=i;return}}}
 function check(){
   var it=board[act];if(!it)return;
   if(it.st==='ok'){next();draw();hideKbd();return}
@@ -851,7 +534,7 @@ Array.prototype.forEach.call(document.querySelectorAll('#opMenu div'),function(e
     opC=el.getAttribute('data-op');
     Array.prototype.forEach.call(document.querySelectorAll('#opMenu div'),function(x){x.className=''});
     el.className='sel2';
-    document.getElementById('opLbl').innerHTML = el.innerHTML;
+    document.getElementById('opLbl').textContent=el.textContent;
     document.getElementById('opMenu').style.display='none';
     build();draw();
   };
